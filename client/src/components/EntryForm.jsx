@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
@@ -20,14 +20,7 @@ function EntryForm({ handleSetData }) {
     przedmiot2: subject2,
     przedmiot3: subject3
   };
-
-  useEffect(() => {
-    if (specialization !== "") {
-      getSubjects();
-    }
-    handleButtonVisibilityChange();
-  }, [semester, specialization, subject1, subject2, subject3]);
-  
+ 
 
   const handleSemesterChange = (event) => {
     setSemester(event.target.value);
@@ -49,7 +42,7 @@ function EntryForm({ handleSetData }) {
     setSubject3(event.target.value);
   };
 
-  const getSubjects = async () => {
+  const getSubjects = useCallback( async () => {
     try {
       const url = "http://localhost:8080/api/subjects/" + specialization;
       const response = await axios.get(url);
@@ -58,9 +51,9 @@ function EntryForm({ handleSetData }) {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [specialization]);
 
-  const handleButtonVisibilityChange = () => {
+  const handleButtonVisibilityChange = useCallback( () => {
     if(semester !== 0 && specialization !== '' && subject1 !== '' && subject2 !== '' && subject3 !== '') {
       setVisible(true);
     } else if(semester !== 0 && specialization === '' && subject1 === '' && subject2 === '' && subject3 === '') {
@@ -71,7 +64,14 @@ function EntryForm({ handleSetData }) {
       setVisible(false);
     }
 
-  }
+  }, [semester, specialization, subject1, subject2, subject3])
+
+  useEffect(() => {
+    if (specialization !== "") {
+      getSubjects();
+    }
+    handleButtonVisibilityChange();
+  }, [specialization, getSubjects, handleButtonVisibilityChange]);
 
   return (
     <div style={{ margin: "5vh", display: "flex", justifyContent: "center", alignContent: "center" }}>

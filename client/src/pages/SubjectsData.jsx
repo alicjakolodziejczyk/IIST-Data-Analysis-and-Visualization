@@ -26,7 +26,7 @@ function SubjectsData() {
 
   useEffect(() => {
     fetchData();
-  }, []); // Remove fetchData from the dependency array
+  }, [fetchData]);
 
   const printSpecialization = (specjalizacja) => {
     switch (specjalizacja) {
@@ -45,7 +45,7 @@ function SubjectsData() {
   
   return (
     <div style={{paddingBottom: '10vh'}}>
-    <Filters setFilterData={setFilterData} graph={false} />
+    <Filters filterData={filterData} setFilterData={setFilterData} graph={false} />
     <Table striped bordered hover variant="light">
       <thead>
         <tr>

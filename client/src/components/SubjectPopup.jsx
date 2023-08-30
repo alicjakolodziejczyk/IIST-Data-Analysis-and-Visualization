@@ -1,17 +1,14 @@
-import React from 'react'
+import {useCallback, useState, useEffect
+} from 'react'
 import Toast from 'react-bootstrap/Toast';
 import axios from 'axios';
 
 function SubjectPopup(props) {
   const {onClose, kod, nazwa} = props;
-  const [subjectsData, setSubjectsData] = React.useState('');
-  const [seeMore, setSeeMore] = React.useState(false);
-
-  React.useEffect(() => {
-    fetchData();
-  }, []);
+  const [subjectsData, setSubjectsData] = useState('');
+  const [seeMore, setSeeMore] = useState(false);
   
-  const fetchData = async () => {
+  const fetchData = useCallback( async () => {
     try {
       const url = "http://localhost:8080/api/subject/" + kod;
       const response = await axios.get(url);
@@ -20,8 +17,11 @@ function SubjectPopup(props) {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [kod]);
 
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
   
   return (
     <Toast onClose={onClose}>

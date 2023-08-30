@@ -59,7 +59,7 @@ function CorrelationMatrix() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
 
 
@@ -71,7 +71,7 @@ function CorrelationMatrix() {
 
   return (
   <div style={{paddingBottom: '10vh'}}>
-    <Filters setFilterData={setFilterData} graph={false} />
+    <Filters filterData={filterData} setFilterData={setFilterData} graph={false} />
   
       <h2 style={{ padding: "25px 0" }}>Correlation Matrix</h2>
       

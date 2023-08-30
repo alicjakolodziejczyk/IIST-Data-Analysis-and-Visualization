@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function EffectsCharts(studentData) {
-  console.log(studentData['studentData']);
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -22,7 +21,7 @@ function EffectsCharts(studentData) {
     };
 
     fetchData();
-  }, []);
+  }, [studentData]);
 
   return (
     <div style={{padding: ' 5vh 10vh'}}>

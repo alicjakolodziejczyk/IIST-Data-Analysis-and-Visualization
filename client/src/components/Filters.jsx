@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState, useEffect } from 'react';
+import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -7,66 +6,67 @@ import Form from 'react-bootstrap/Form';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 function Filters(props) {
-  const [semesters, setSemesters] = useState([1, 2, 3, 4, 5, 6, 7]);
-  const [mandatory, setMandatory] = useState(['obieralne', 'obowiązkowe'])
-  const [specializations, setSpecializations] = useState(['SE', 'IT', 'CE', 'IIS']);
-  const [categories, setCategories] = useState(['wiedza', 'umiejętność', 'kompetencje społeczne']);
-
-  useEffect(() => {
-    props.setFilterData({
-      semesters: semesters,
-      mandatory: mandatory,
-      specializations: specializations,
-      categories: categories
-    });
-  }, [semesters, mandatory, specializations, categories, props])
-
+  
   const handleSemesterChange = (event) => {
     const semester = Number(event.target.id.split('-')[1]); 
     console.log(typeof semester)
     if (event.target.checked) {
-      setSemesters((prevSemesters) => [...prevSemesters, semester]);
+      props.setFilterData((prevFilterData) => ({
+        ...prevFilterData,
+        semesters: [...prevFilterData.semesters, semester],
+      }));
     } else {
-      setSemesters((prevSemesters) =>
-        prevSemesters.filter((s) => s !== semester)
-      );
+      props.setFilterData((prevFilterData) => ({
+        ...prevFilterData,
+        semesters: prevFilterData.semesters.filter((s) => s !== semester),
+      }));
     }
-    console.log(semesters);
   };
   
   const handleMandatoryChange = (event) => {
     const mandatory = event.target.id;
     if (event.target.checked) {
-      setMandatory((prevMandatory) => [...prevMandatory, mandatory]);
+      props.setFilterData((prevFilterData) => ({
+        ...prevFilterData,
+        mandatory: [...prevFilterData.mandatory, mandatory],
+      }));
     } else {
-      setMandatory((prevMandatory) =>
-        prevMandatory.filter((m) => m !== mandatory)
-      );
+      props.setFilterData((prevFilterData) => ({
+        ...prevFilterData,
+        mandatory: prevFilterData.mandatory.filter((m) => m !== mandatory),
+      }));
     }
   }
 
   const handleSpecializationChange = (event) => {
     const specialization = event.target.id;
     if (event.target.checked) {
-      setSpecializations((prevSpecializations) => [
-        ...prevSpecializations,
-        specialization,
-      ]);
+      props.setFilterData((prevFilterData) => ({
+        ...prevFilterData,
+        specializations: [...prevFilterData.specializations, specialization],
+      }));
     } else {
-      setSpecializations((prevSpecializations) =>
-        prevSpecializations.filter((s) => s !== specialization)
-      );
+      props.setFilterData((prevFilterData) => ({
+        ...prevFilterData,
+        specializations: prevFilterData.specializations.filter(
+          (s) => s !== specialization
+        ),
+      }));
     }
   };
 
   const handleCategoryChange = (event) => {
     const category = event.target.id;
     if (event.target.checked) {
-      setCategories((prevCategories) => [...prevCategories, category]);
+      props.setFilterData((prevFilterData) => ({
+        ...prevFilterData,
+        categories: [...prevFilterData.categories, category],
+      }));
     } else {
-      setCategories((prevCategories) =>
-        prevCategories.filter((c) => c !== category)
-      );
+      props.setFilterData((prevFilterData) => ({
+        ...prevFilterData,
+        categories: prevFilterData.categories.filter((c) => c !== category),
+      }));
     }
   };
 
@@ -86,10 +86,10 @@ function Filters(props) {
                       <div key={`sem-${semester}`} style={{ padding: '0 10px' }}>
                         <Form.Check
                           type="checkbox"
-                          id={`semester-${semester}`} // Unique ID for each checkbox
+                          id={`semester-${semester}`}
                           label={semester}
                           onChange={handleSemesterChange}
-                          checked={semesters.includes(semester)}
+                          checked={props.filterData.semesters.includes(semester)}
                         />
                       </div>
                     ))}
@@ -115,7 +115,7 @@ function Filters(props) {
                             id={item}
                             label={item}
                             onChange={handleMandatoryChange}
-                            checked={mandatory.includes(item)}
+                            checked={props.filterData.mandatory.includes(item)}
                           />
                         </div>
                       ))}
@@ -140,7 +140,7 @@ function Filters(props) {
                             id={specialization}
                             label={specialization}
                             onChange={handleSpecializationChange}
-                            checked={specializations.includes(specialization)}
+                            checked={props.filterData.specializations.includes(specialization)}
                           />
                         </div>
                       ))}
@@ -162,7 +162,7 @@ function Filters(props) {
                             id={category}
                             label={category}
                             onChange={handleCategoryChange}
-                            checked={categories.includes(category)}
+                            checked={props.filterData.categories.includes(category)}
                           />
                         </div>
                       ))}

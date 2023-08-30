@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { GraphCanvas, useSelection } from 'reagraph';
 import SubjectPopup from './SubjectPopup';
 

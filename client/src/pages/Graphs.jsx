@@ -29,7 +29,7 @@ const Graphs = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
 
   return (
@@ -47,7 +47,7 @@ const Graphs = () => {
         </div>
       ) : (
         <div>
-          <Filters setFilterData={setFilterData} graph={true} visible={visible} setVisible={setVisible} />
+          <Filters filterData={filterData} setFilterData={setFilterData} graph={true} visible={visible} setVisible={setVisible} />
           <Graph edges={edges} nodes={nodes} visible={visible} />
         </div>
       )}
