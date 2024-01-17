@@ -1,75 +1,75 @@
 # IIST Data Analysis and Visualization
 
-## 1. Uruchomienie
+## 1. Setup
 
-### Wymagania wstępne:
+### Prerequisites
 
-- Zainstalowany node.js
-- Baza MongoDB lokalna lub w chmurze Atlas MongoDB
+- Node.js installed
+- A local MongoDB database or cloud-based Atlas MongoDB
 
-### Przygotowanie projektu
+### Project Preparation
 
-1. Pobierz kod z repozytorium, na przykład za pomocą komendy:
+1. Download the code from the repository, for example using the command:
 `gh repo clone alicjakolodziejczyk/IIST-Data-Analysis-and-Visualization`
 
-2. W folderze `server` dodaj plik `.env` i zapisz w nim parametr `DB` zawierający URL do połączenia z bazą danych.
+2. In the `server` folder, add a `.env` file and save the `DB` parameter in it, containing the URL for the database connection.
 
-### Instalacja pakietów Node na backendzie:
+### Installing Node Packages on Backend:
 
 ```
 cd server
 npm install
 ```
-### Instalacja pakietów Node na frontendzie:
+### Installing Node Packages on Frontend:
 ```
 cd client
 npm install
 ```
-### Uruchomienie frontendu oraz backendu:
-Uruchom poniższą komendę w folderze `client` oraz w folderze `server`:
+### Running the Frontend and Backend:
+Run the following command in the `client` and `server` folders:
 ```
 npm start
 ```
 
-## 2. Obsługa
+## 2. Usage
 > [!WARNING]
-> Program zawiera na razie dane dotyczące wszystkich przedmiotów obowiązkowych oraz jednej specjalizacji - CE.
-> Wybranie innych specjalizacji w filtrze może skutkować brakiem danych do wyświetlenia.
+> The program currently contains data for all mandatory subjects and one specialization - CE.
+> Selecting other specializations in the filter may result in no data being displayed.
 
-### Podstrona Effects
+### Effects Subpage
 
-Strona ta pokazuje, jaka część każdego efektu jest już za studentem, jaką część efektu w danym semestrze zdobywa, a jaką część jeszcze przed nim w przyszłych semestrach.
+This page shows what part of each effect the student has already completed, how much they acquire in a given semester, and how much remains in future semesters.
 
-Aby strona zaczęła wyświetlać dane, należy w panelu po lewej stronie wypełnić przynajmniej semestr, na którym użytkownik się znajduje; reszta danych nie jest wymagana.
+To start displaying data, at least the semester in which the user is currently enrolled must be filled in on the left panel; the rest of the data is not required.
 
-- Po najechaniu na pasek postępu wyświetlają się przedmioty, których dane przyczyniły się do danego wyniku konkretnego efektu.
+- Hovering over the progress bar displays the subjects whose data contributed to the specific result of a particular effect.
   
-### Podstrona Graphs
+### Graphs Subpage
 
-Wyświetla relację między przedmiotami a efektami.
+Displays the relationship between subjects and effects.
 
-- Zawiera filtry na ciemnym pasku na dole strony.
-- Umożliwia wyświetlenie lub schowanie ilości wspólnych efektów przy użyciu checkboxa.
-- Po kliknięciu lewym klawiszem w węzeł podświetlą się wszystkie krawędzie, które z niego wychodzą.
-- Po kliknięciu prawym klawiszem w węzeł wyświetli się okienko z pełnymi danymi przedmiotu.
+- Includes filters on the dark bar at the bottom of the page.
+- Allows showing or hiding the number of common effects using a checkbox.
+- Left-clicking on a node highlights all edges that come out of it.
+- Right-clicking on a node displays a window with full subject data.
   
-### Podstrona Correlation Matrix
+### Correlation Matrix Subpage
 
-  Podstrona zawiera filtry na ciemnym pasku na dole strony, które dotyczą obydwu sekcji.
+  This subpage contains filters on the dark bar at the bottom of the page, applicable to both sections.
   
-  **Sekcja 1 - Macierz**
-    Oprócz wyświetlenia macierzy, sekcja umożliwia:
-    - Wyświetlenie nazwy przedmiotu po najechaniu na kod.
-    - Wyświetlenie okienka z kompletnymi danymi o przedmiocie po kliknięciu na kod.
-    - Wyświetlenie okienka z porównaniem kompletnych danych o przedmiotach składających się na korelację po kliknięciu w wynik korelacji.
+  **Section 1 - Matrix**
+    In addition to displaying the matrix, this section allows:
+    - Displaying the subject name when hovering over the code.
+    - Displaying a window with complete subject data when clicking on the code.
+    - Displaying a window comparing complete data on subjects that make up the correlation when clicking on the correlation result.
     
-  **Sekcja 2 - Tabela**
-    Wyświetla pary przedmiotów posortowane malejąco względem ich korelacji.
-    - Wyświetlenie okienka z porównaniem kompletnych danych o przedmiotach składających się na korelację po kliknięciu w rząd.
+  **Section 2 - Table**
+   Displays pairs of subjects sorted in descending order of their correlation.
+    - Displaying a window comparing complete data on subjects that make up the correlation when clicking on a row.
 
-### Podstrona Data
+### Data Subpage
 
- Na tej stronie początkowo wyświetlone są kompletne dane dla każdego przedmiotu w sylabusie. 
- Za pomocą filtrów znajdujących się na ciemnym pasku u dołu można wyświetlić przedmioty spełniające konkretne wymagania, np. semestr 5, przedmioty obieralne, specjalność CE.
+Initially, this page displays complete data for each subject in the syllabus.
+Using filters located on the dark bar at the bottom, you can display subjects that meet specific criteria, e.g., semester 5, elective subjects, CE specialization.
 
 
